@@ -1,0 +1,2 @@
+# Kalkulator
+Prosty kalkulator - JS
