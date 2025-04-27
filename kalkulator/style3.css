@@ -1,36 +1,64 @@
-body{
-    background-image: linear-gradient(to right, red, blue);
+body {
+    background: linear-gradient(135deg, #ff416c, #4facfe);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#obudowa{
-    margin-top: 10%;
-    margin-left: 42%;
-    width: 300px;
-    border-radius: 20%;
-    height: 500px;
-    border: dotted black;
-    background-color: white;
+#obudowa {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 320px;
 }
 
-#wyswietlacz{
-    margin-top: 10%;
-    border: solid;
-    background-color: white;
-    width: 250px;
-    height: 40px;
+#wyswietlacz {
+    width: 90%;
+    height: 60px;
+    background: #e0e0e0;
+    border: none;
+    border-radius: 10px;
+    margin: 0 auto 20px auto;
+    font-size: 2rem;
+    padding: 10px;
     text-align: right;
-    position: relative;
-    left: 8%;
-    font-size: 200%;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+    display: block;
+    overflow-x: auto;
 }
 
-.button{
-width: 50px;
-height: 50px;
-font-size: 200%;
-margin-top: 10px;
+.button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    margin: 10px;
+    border: none;
+    border-radius: 50%;
+    background: #4facfe;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.line{
-    text-align: center;
+.button:hover {
+    background: #00c6ff;
+    transform: scale(1.1);
+}
+
+.line {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.button.operator {
+    background: #ff416c;
+}
+
+.button.operator:hover {
+    background: #ff4b2b;
 }
