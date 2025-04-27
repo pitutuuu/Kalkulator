@@ -1,115 +1,48 @@
-//Aleksander Sysio
+const wyswietlacz = document.getElementById("wyswietlacz");
+let zapis = 0;
+let zapis2 = 0;
+let znak = "";
+let ostatniaOperacja = false;
 
-document.getElementById("1").onclick = function(){
-    a = parseFloat(document.getElementById("1").value)
-    console.log(typeof a)
-    document.getElementById("wyswietlacz").innerHTML += a
-}
-document.getElementById("2").onclick = function(){
-    a = parseFloat(document.getElementById("2").value)
-    console.log(typeof a)
-    document.getElementById("wyswietlacz").innerHTML += a
-}
-document.getElementById("3").onclick = function(){
-    a = parseFloat(document.getElementById("3").value)
-    console.log(typeof a)
-    document.getElementById("wyswietlacz").innerHTML += a
-}
-document.getElementById("4").onclick = function(){
-    a = parseFloat(document.getElementById("4").value)
-    console.log(typeof a)
-    document.getElementById("wyswietlacz").innerHTML += a
-}
-document.getElementById("5").onclick = function(){
-    a = parseFloat(document.getElementById("5").value)
-    console.log(typeof a)
-    document.getElementById("wyswietlacz").innerHTML += a
-}
-document.getElementById("6").onclick = function(){
-    a = parseFloat(document.getElementById("6").value)
-    console.log(typeof a)
-    document.getElementById("wyswietlacz").innerHTML += a
-}
-document.getElementById("7").onclick = function(){
-    a = parseFloat(document.getElementById("7").value)
-    console.log(typeof a)
-    document.getElementById("wyswietlacz").innerHTML += a
-}
-document.getElementById("8").onclick = function(){
-    a = parseFloat(document.getElementById("8").value)
-    console.log(typeof a)
-    document.getElementById("wyswietlacz").innerHTML += a
-}
-document.getElementById("9").onclick = function(){
-    a = parseFloat(document.getElementById("9").value)
-    console.log(typeof a)
-    document.getElementById("wyswietlacz").innerHTML += a
-}
-document.getElementById("0").onclick = function(){
-    a = parseFloat(document.getElementById("0").value)
-    console.log(typeof a)
-    document.getElementById("wyswietlacz").innerHTML += a
-}
+const cyfry = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
+const operatory = ["+", "-", "x", "/"];
 
-function wyswietl(){
-    zapis2 = parseFloat(document.getElementById("wyswietlacz").innerHTML)
-    if (znak == "+"){
-        //console.log(zapis2)
-        wynik = zapis + zapis2
-        //console.log(wynik)
-        document.getElementById("wyswietlacz").innerHTML = wynik
+cyfry.forEach(symbol => {
+    document.getElementById(symbol).onclick = () => {
+        if (ostatniaOperacja) {
+            wyswietlacz.innerHTML = "";
+            ostatniaOperacja = false;
+        }
+        wyswietlacz.innerHTML += symbol;
     }
-    if (znak == "-"){
-        //console.log(zapis2)
-        wynik = zapis - zapis2
-        //console.log(wynik)
-        document.getElementById("wyswietlacz").innerHTML = wynik
-    }
-    if (znak == "x"){
-        //console.log(zapis2)
-        wynik = zapis * zapis2
-        //console.log(wynik)
-        document.getElementById("wyswietlacz").innerHTML = wynik
-    }
-    if (znak == "/"){
-        //console.log(zapis2)
-        wynik = zapis / zapis2
-        //console.log(wynik)
-        document.getElementById("wyswietlacz").innerHTML = wynik.toFixed(2) //zaokrąglenie do dwóch po przecinku
-    }
-}
+});
 
-document.getElementById("=").onclick = function(){
-    wyswietl()
-}
+operatory.forEach(op => {
+    document.getElementById(op).onclick = () => {
+        zapis = parseFloat(wyswietlacz.innerHTML) || 0;
+        znak = op;
+        wyswietlacz.innerHTML = "";
+        ostatniaOperacja = false;
+    }
+});
 
-document.getElementById("+").onclick = function(){
-    znak = "+"
-    zapis = parseFloat(document.getElementById("wyswietlacz").innerHTML)
-    //console.log(zapis)
-    document.getElementById("wyswietlacz").innerHTML = ""
-}
-document.getElementById("-").onclick = function(){
-    znak = "-"
-    zapis = parseFloat(document.getElementById("wyswietlacz").innerHTML)
-    //console.log(zapis)
-    document.getElementById("wyswietlacz").innerHTML = ""
-}
-document.getElementById("x").onclick = function(){
-    znak = "x"
-    zapis = parseFloat(document.getElementById("wyswietlacz").innerHTML)
-    //console.log(zapis)
-    document.getElementById("wyswietlacz").innerHTML = ""
-}
-document.getElementById("/").onclick = function(){
-    znak = "/"
-    zapis = parseFloat(document.getElementById("wyswietlacz").innerHTML)
-    //console.log(zapis)
-    document.getElementById("wyswietlacz").innerHTML = ""
-}
-document.getElementById(".").onclick = function(){
-    zapis = document.getElementById("wyswietlacz").innerHTML
-    document.getElementById("wyswietlacz").innerHTML = zapis + "."
-    zapis = parseFloat(document.getElementById("wyswietlacz").innerHTML)
-    //console.log(zapis)
-}
+document.getElementById("=").onclick = () => {
+    let nowyZapis2 = parseFloat(wyswietlacz.innerHTML);
+
+    if (!ostatniaOperacja) {
+        zapis2 = nowyZapis2 || zapis2;
+    }
+
+    let wynik = 0;
+
+    switch (znak) {
+        case "+": wynik = zapis + zapis2; break;
+        case "-": wynik = zapis - zapis2; break;
+        case "x": wynik = zapis * zapis2; break;
+        case "/": wynik = zapis2 !== 0 ? (zapis / zapis2).toFixed(2) : "Błąd"; break;
+    }
+
+    wyswietlacz.innerHTML = wynik;
+    zapis = parseFloat(wynik);
+    ostatniaOperacja = true;
+};
